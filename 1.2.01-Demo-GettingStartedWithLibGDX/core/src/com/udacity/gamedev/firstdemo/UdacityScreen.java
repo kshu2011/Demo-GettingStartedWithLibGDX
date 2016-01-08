@@ -24,6 +24,10 @@ public class UdacityScreen extends InputAdapter implements Screen {
     private static final float LOGO_WIDTH = 200.0f;
     private float logoHeight;
 
+    boolean touchDown = false;
+    int x = 0;
+    int y = 0;
+
     @Override
     public void show() {
         batch = new SpriteBatch();
@@ -35,6 +39,7 @@ public class UdacityScreen extends InputAdapter implements Screen {
         touchEffect.setEmittersCleanUpBlendFunction(false);
         touchEffectPool = new ParticleEffectPool(touchEffect, 1, 2);
         Gdx.input.setInputProcessor(this);
+
     }
 
     @Override
@@ -47,6 +52,11 @@ public class UdacityScreen extends InputAdapter implements Screen {
                 (Gdx.graphics.getHeight() - logoHeight)/2,
                 LOGO_WIDTH,
                 logoHeight);
+
+        if(touchDown) {
+            spawnParticleEffect(x, y);
+        }
+
         for (int i = effects.size - 1; i >= 0; i--) {
             PooledEffect effect = effects.get(i);
             effect.draw(batch, delta);
@@ -71,7 +81,16 @@ public class UdacityScreen extends InputAdapter implements Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        spawnParticleEffect(screenX, screenY);
+       x = screenX;
+        y = screenY;
+        touchDown = true;
+       // spawnParticleEffect(screenX, screenY);
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        touchDown = false;
         return false;
     }
 
