@@ -39,11 +39,11 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         // TODO: Draw a white square matching the bounds
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 
         // TODO: Set the working color to black, and call punchCantorGasket with the bounds
         shapeRenderer.setColor(Color.BLACK);
-        punchCantorGasket(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, recursionNumber);
+        punchCantorGasket(bounds.x, bounds.y, bounds.width/3, recursionNumber);
         // TODO: End the batch
         shapeRenderer.end();
     }
@@ -54,10 +54,10 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
 
         // TODO: Draw a black square in the middle square
        // shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        float midX = x/3;
-        float midY = y/3;
-        float width = Gdx.graphics.getWidth()/3;
-        float height = Gdx.graphics.getHeight()/3;
+        float midX = x + size;
+        float midY = y + size;
+        float width = size;
+        float height = size;
         shapeRenderer.rect(midX, midY, width, height);
       //  shapeRenderer.end();
         // TODO: Call punchCantorGasket on all 8 other squares
