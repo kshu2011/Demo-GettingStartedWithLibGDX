@@ -2,6 +2,7 @@ package com.udacity.gamedev.drawthecantorgasket;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,6 +19,7 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
 
     ShapeRenderer shapeRenderer;
     // TODO: Set a constant for how many recursions to draw. 5 is a good place to start
+    int recursionNumber = 5;
 
     @Override
     public void create () {
@@ -34,11 +36,14 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
         Rectangle bounds = findLargestSquare();
 
         // TODO: Begin a filled shapeRenderer batch
-
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         // TODO: Draw a white square matching the bounds
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // TODO: Set the working color to black, and call punchCantorGasket with the bounds
-
+        shapeRenderer.setColor(Color.BLACK);
+        punchCantorGasket(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, recursionNumber);
         // TODO: End the batch
         shapeRenderer.end();
     }
@@ -48,7 +53,13 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
         // TODO: Base case, if recursions = 0, return
 
         // TODO: Draw a black square in the middle square
-
+       // shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        float midX = x/3;
+        float midY = y/3;
+        float width = Gdx.graphics.getWidth()/3;
+        float height = Gdx.graphics.getHeight()/3;
+        shapeRenderer.rect(midX, midY, width, height);
+      //  shapeRenderer.end();
         // TODO: Call punchCantorGasket on all 8 other squares
 
     }
