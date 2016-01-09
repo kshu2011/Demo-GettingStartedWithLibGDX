@@ -19,7 +19,7 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
 
     ShapeRenderer shapeRenderer;
     // TODO: Set a constant for how many recursions to draw. 5 is a good place to start
-    int recursionNumber = 5;
+    int recursionNumber = 2;
 
     @Override
     public void create () {
@@ -43,25 +43,40 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
 
         // TODO: Set the working color to black, and call punchCantorGasket with the bounds
         shapeRenderer.setColor(Color.BLACK);
-        punchCantorGasket(bounds.x, bounds.y, bounds.width/3, recursionNumber);
+        punchCantorGasket(bounds.x, bounds.y, bounds.width, recursionNumber);
         // TODO: End the batch
         shapeRenderer.end();
     }
 
 
     private void punchCantorGasket(float x, float y, float size, int recursions){
+
         // TODO: Base case, if recursions = 0, return
-
+        if (recursions == 0) {
+            return;
+        }
         // TODO: Draw a black square in the middle square
-       // shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        float midX = x + size;
-        float midY = y + size;
-        float width = size;
-        float height = size;
-        shapeRenderer.rect(midX, midY, width, height);
-      //  shapeRenderer.end();
-        // TODO: Call punchCantorGasket on all 8 other squares
 
+        float midX = x + size/3;
+        float midY = y + size/3;
+        float width = size/3;
+        float height = size/3;
+        shapeRenderer.rect(midX, midY, width, height);
+        // TODO: Call punchCantorGasket on all 8 other squares
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                float xIs = x + (size/9) + (size/3)*i;
+                float yIs = y + (size/9) + (size/3)*j;
+                shapeRenderer.rect(xIs, yIs, size/9, size/9);
+                System.out.println(xIs + " and " + yIs);
+             //   punchCantorGasket(xIs, yIs, size/3, recursions - 1);
+            }
+        }
+
+       // for (int i = 0; i < 9; i++) {
+        //    if (i == 4) continue;
+         //   punchCantorGasket(i%3 * size/3 + x, i/3 * size/3 + y, size/3, recursions - 1);
+        //}
     }
 
     private Rectangle findLargestSquare(){
